@@ -4,7 +4,7 @@
           
 </div>
 
-## Deployed at: [chart-project.herokuapp.com](https://chart-project.herokuapp.com/)
+## Deployed at: [chart-movie-project.herokuapp.com](https://chart-movie-project.herokuapp.com/)
 
 ## Description
 A simple Django app demonstrating a dynamic chart. User enters a movie name and box-office, chart dynamically updates.
