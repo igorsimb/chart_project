@@ -23,7 +23,7 @@
 {% for movie in movies %}
     <ul>
         <li>
-            <strong>"{{ movie.title }}"</strong>. Сборы: {{ movie.gross|intcomma }} гривен |
+            <strong>"{{ movie.title }}"</strong>. Сборы: ${{ movie.gross|intcomma }} |
             <a href="{% url 'delete-movie' movie.pk %}" class="btn btn-close" title="Удалить"></a>
         </li>
     </ul>
