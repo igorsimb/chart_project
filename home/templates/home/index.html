@@ -1,0 +1,100 @@
+{% extends 'home/base.html' %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Chart Project</title>
+{% endblock title %}
+
+{% block content %}
+
+
+<h1>Фильмы и Chart.js</h1>
+
+<div class="d-flex justify-content-between">
+
+<div style="width:40vw">
+    <!-- Canvas -->
+    <canvas id="myChart"></canvas>
+</div>
+
+<div>
+    <h3>Фильмы: </h3>
+{% for movie in movies %}
+    <ul>
+        <li>
+            <strong>"{{ movie.title }}"</strong>. Сборы: {{ movie.gross|intcomma }} гривен |
+            <a href="{% url 'delete-movie' movie.pk %}" class="btn btn-close" title="Удалить"></a>
+        </li>
+    </ul>
+{% endfor %}
+</div>
+
+</div>
+
+<!-- Form -->
+<div class="card w-50 shadow mt-4">
+  <div class="card-header">
+    Добавить фильм
+  </div>
+  <div class="card-body">
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        {% crispy form %}
+
+    </form>
+  </div>
+</div>
+
+
+
+<script>
+// Register the datalabels plugin to all charts:
+{#Chart.register(ChartDataLabels);#}
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for movie in movies %}'{{ movie.title }}',{% endfor %}],
+        datasets: [{
+            label: '# of Votes',
+            data: [{% for movie in movies %}'{{ movie.gross }}',{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            labels: {
+                render: 'value',
+            },
+            datalabels: {
+                align: 'top',
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+{% endblock content %}
