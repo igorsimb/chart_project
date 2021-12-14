@@ -1,6 +1,7 @@
 # Dynamic Chart Project
 <div align="center">
-<img src="https://github.com/igorsimb/chart_project/blob/assets/screenshot.png?raw=true" width="75%" alt="Chart Project">
+<img src="https://github.com/igorsimb/chart_project/blob/master/assets/screenshot.png?raw=true" width="550" height="300" alt="Chart Project">
+          
 </div>
 
 ## Deployed at: [chart-project.herokuapp.com](https://chart-project.herokuapp.com/)
